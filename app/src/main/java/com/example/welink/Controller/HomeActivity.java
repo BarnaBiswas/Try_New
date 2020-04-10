@@ -1,4 +1,4 @@
-package com.example.welink;
+package com.example.welink.Controller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,16 +7,15 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.example.welink.Fragments.AllUserFragment;
 import com.example.welink.Fragments.HomeFragment;
 import com.example.welink.Fragments.NotificationFragment;
+import com.example.welink.Fragments.PostFragment;
 import com.example.welink.Fragments.ProfileFragment;
+import com.example.welink.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     private AllUserFragment allUserFragment;
     private ProfileFragment profileFragment;
     private NotificationFragment notificationFragment;
+    private PostFragment postFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +42,15 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         mainFrame = (FrameLayout) findViewById(R.id.mainFrame);
         mainNav = (BottomNavigationView) findViewById(R.id.bottomNav);
-
         //getting the fragments
         homeFragment = new HomeFragment();
         allUserFragment = new AllUserFragment();
         profileFragment = new ProfileFragment();
         notificationFragment = new NotificationFragment();
+        postFragment = new PostFragment();
 
         mAuth = FirebaseAuth.getInstance();
         userRef = FirebaseDatabase.getInstance().getReference().child("Users");
-
-
-
 
         mainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -71,6 +68,9 @@ public class HomeActivity extends AppCompatActivity {
                         return true;
                     case R.id.notification:
                         addFragment(notificationFragment);
+                        return true;
+                    case R.id.post:
+                        addFragment(postFragment);
                         return true;
                     default:
                         return false;
