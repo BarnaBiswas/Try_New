@@ -74,6 +74,19 @@ public class HomeFragment extends Fragment {
                 holder.postedTime.setText(post.getTime());
                 holder.post_description.setText(post.getDescription());
 
+                holder.commentBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Fragment newFragment = new CommentFragment();
+                        Bundle args = new Bundle();
+                        args.putString("POSTKey",POSTKey);
+                        newFragment.setArguments(args);
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.mainFrame, newFragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                    }
+                });
             }
 
             @NonNull

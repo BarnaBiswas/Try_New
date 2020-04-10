@@ -48,7 +48,6 @@ public class HomeActivity extends AppCompatActivity {
         profileFragment = new ProfileFragment();
         notificationFragment = new NotificationFragment();
         postFragment = new PostFragment();
-
         mAuth = FirebaseAuth.getInstance();
         userRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
